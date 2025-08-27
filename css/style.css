@@ -28,7 +28,7 @@
       justify-content: space-between;
     }
     .card img {
-      height: 300px;
+      height: 180px;
       object-fit: cover;
     }
     .card-body {
