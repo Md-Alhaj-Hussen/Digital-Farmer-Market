@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Farmer's Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="/img/logo1.png" alt="Logo"></a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Fruits</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Banana</a></li>
+                            <li><a class="dropdown-item" href="#">Strawberry</a></li>
+                            <li><a class="dropdown-item" href="#">Pineapple</a></li>
+                            <li><a class="dropdown-item" href="#">Apple</a></li>
+                            <li><a class="dropdown-item" href="#">Guava</a></li>
+                            <li><a class="dropdown-item" href="#">Orange</a></li>
+                            <li><a class="dropdown-item" href="#">Papaya</a></li>
+                            <li><a class="dropdown-item" href="#">Avocado</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown">Vegetables</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Broccoli</a></li>
+                            <li><a class="dropdown-item" href="#">Eggplant</a></li>
+                            <li><a class="dropdown-item" href="#">Tomatoes</a></li>
+                            <li><a class="dropdown-item" href="#">Cucumber</a></li>
+                            <li><a class="dropdown-item" href="#">Pumpkin</a></li>
+                            <li><a class="dropdown-item" href="#">Carrot</a></li>
+                            <li><a class="dropdown-item" href="#">Cabbage</a></li>
+                            <li><a class="dropdown-item" href="#">Chili Pepper</a></li>
+                            <li><a class="dropdown-item" href="#">Capsicum</a></li>
+                            <li><a class="dropdown-item" href="#">Green Peas</a></li>
+                            <li><a class="dropdown-item" href="#">Onion</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Crops</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Potato</a></li>
+                            <li><a class="dropdown-item" href="#">Rice</a></li>
+                            <li><a class="dropdown-item" href="#">Corn</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#aboutSection">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contactSection">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#feedbackSection">Feedback</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" id="cartIcon">
+                            🛒 Cart
+                            <span id="cartCount"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                    </li>                    
+                </ul>
+                <form class="d-flex me-2" role="search" id="searchForm">
+                    <div class="input-group">
+                        <input class="form-control me-2" type="search" placeholder="Search Product's Name"
+                            id="searchInput">
+                        <button class="btn btn-outline-light" type="submit">Search</button>
+                    </div>
+                </form>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light" type="button" id="loginBtn">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4><i class="fas fa-shopping-cart me-2"></i> Your Cart</h4>
+                <button class="btn btn-sm btn-outline-secondary" id="closeCart">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div id="cartItemsContainer">
+                <!-- Cart items will be dynamically inserted here -->
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h5>Your cart is empty</h5>
+                    <p>Start shopping to add items to your cart</p>
+                </div>
+            </div>
+
+            <div class="cart-total mt-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">৳0.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Delivery Fee:</span>
+                    <span id="deliveryFee">৳60.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Tax (5%):</span>
+                    <span id="taxAmount">৳0.00</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-4">
+                    <strong>Total:</strong>
+                    <strong id="cartTotal">৳0.00</strong>
+                </div>
+
+                <h6 class="mb-3">Delivery Address</h6>
+                <div class="mb-3">
+                    <textarea class="form-control" id="deliveryAddress" rows="2"
+                        placeholder="Enter your delivery address"></textarea>
+                </div>
+
+                <h6 class="mb-3">Payment Method</h6>
+                <div class="mb-4">
+                    <div class="payment-method" data-method="cod">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery"
+                                value="cod" checked>
+                            <label class="form-check-label" for="cashOnDelivery">
+                                Cash on Delivery
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="payment-method" data-method="bkash">
+                        <img src="/img/bkash.svg" alt="bKash" class="payment-icon">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="bkash" value="bkash">
+                            <label class="form-check-label" for="bkash">
+                                bKash
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="payment-method" data-method="nagad">
+                        <img src="/img/nagad.png" alt="Nagad" class="payment-icon">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="nagad" value="nagad">
+                            <label class="form-check-label" for="nagad">
+                                Nagad
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="payment-method" data-method="rocket">
+                        <img src="/img/rocket.png" alt="Rocket" class="payment-icon">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="rocket"
+                                value="rocket">
+                            <label class="form-check-label" for="rocket">
+                                Rocket
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="payment-method" data-method="card">
+                        <i class="fas fa-credit-card payment-icon"></i>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="card" value="card">
+                            <label class="form-check-label" for="card">
+                                Credit/Debit Card
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn checkout-btn w-100" id="checkoutBtn" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4><i class="fas fa-user me-2"></i> Login</h4>
+                <button class="btn btn-sm btn-outline-secondary" id="closeLogin">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="btn-group mb-4 w-100">
+                <button class="btn btn-outline-warning btn-toggle active-tab" id="farmerBtn">Farmer</button>
+                <button class="btn btn-outline-warning btn-toggle" id="buyerBtn">Buyer</button>
+            </div>
+
+            <!-- Farmer Form -->
+            <form id="farmerForm">
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="tel" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100 mb-3">Login</button>
+                <a href="#" class="form-link">Forgot Password?</a>
+                <a href="#" class="form-link">Create an Account</a>
+            </form>
+
+            <!-- Buyer Form -->
+            <form id="buyerForm" style="display:none;">
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="tel" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100 mb-3">Login</button>
+                <a href="#" class="form-link">Forgot Password?</a>
+                <a href="#" class="form-link">Create an Account</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-section text-center text-white d-flex align-items-center justify-content-center"
+        style="background: url('/img/banner.jpg') no-repeat center center/cover; width: 100%; height: 400px; margin-top: auto;">
+        <h1 class="fw-bold top-text">Welcome To Our Service field</h1>
+    </div>
+
+    <!-- Agricultural Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose Digital Farmer's Platform?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h4>Direct from Farm</h4>
+                        <p>Get fresh produce directly from local farmers, eliminating middlemen and ensuring fair prices
+                            for both farmers and consumers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>100% Organic</h4>
+                        <p>All our products are grown using organic farming practices without harmful pesticides or
+                            chemicals.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4>Fast Delivery</h4>
+                        <p>We deliver within 24 hours of harvesting to ensure you get the freshest possible produce.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <div id="searchResults" class="container-fluid my-4" style="display:none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-center mb-0">Search Results</h2>
+            <button class="btn btn-outline-secondary" id="clearSearch">
+                <i class="fas fa-times me-1"></i> Clear Search
+            </button>
+            <div class="row g-4" id="searchResultsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Our Products</h2>
+        <div class="row g-4">
+            <!-- Product items-->
+            <!-- Fruits Section-->
+            <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="banana">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/banana.jpg" class="card-img-top product-img" alt="Banana">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Banana</h5>
+                        <p class="card-text">Price: ৳40 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Banana" data-price="40"
+                            data-img="/img/banana.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="strawberry">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/strawberries.jpg" class="card-img-top product-img" alt="Strawberry">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Strawberry</h5>
+                        <p class="card-text">Price: ৳400 / box</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Strawberry" data-price="400"
+                            data-img="/img/strawberries.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="apple">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/apple2.jpg" class="card-img-top product-img" alt="Apple">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Apple</h5>
+                        <p class="card-text">Price: ৳400 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Apple" data-price="400"
+                            data-img="/img/apple.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="guava">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/guava.jpeg" class="card-img-top product-img" alt="Guava">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Guava</h5>
+                        <p class="card-text">Price: ৳60 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Guava" data-price="60"
+                            data-img="/img/guava.jpeg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="orange">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/orange2.jpg" class="card-img-top product-img" alt="Orange">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Orange</h5>
+                        <p class="card-text">Price: ৳400 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Orange" data-price="400"
+                            data-img="/img/orange2.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+             </div>  
+             <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="papaya">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/papaya.jpg" class="card-img-top product-img" alt="Papaya">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Papaya</h5>
+                        <p class="card-text">Price: ৳80 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Papaya" data-price="80"
+                            data-img="/img/papaya.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+             </div> 
+             <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="pineapple">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/pineapple2.jpg" class="card-img-top product-img" alt="Pineapple">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pineapple</h5>
+                        <p class="card-text">Price: ৳70 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Pineapple" data-price="70"
+                            data-img="/img/pineapple2.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+             </div>     
+            <div class="col-md-3 mb-4 col-sm-6" data-category="fruit" data-name="avocado">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/avocado.jpg" class="card-img-top product-img" alt="Avocado">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Avocado</h5>
+                        <p class="card-text">Price: ৳400 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Avocado" data-price="400"
+                            data-img="/img/avocado.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Vegetables Section-->
+            
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="tomato">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/tomato.jpg" class="card-img-top product-img" alt="Tomato">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Tomatoes</h5>
+                        <p class="card-text">Price: ৳300 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Tomatoes" data-price="300"
+                            data-img="/img/tomato.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="cabbage">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/cabbage.jpg" class="card-img-top product-img" alt="Cabbage">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Cabbage</h5>
+                        <p class="card-text">Price: ৳60 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Cabbage" data-price="60"
+                            data-img="/img/cabbage.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="broccoli">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/broccoli.webp" class="card-img-top product-img" alt="Broccoli">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Broccoli</h5>
+                        <p class="card-text">Price: ৳80 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Broccoli" data-price="80"
+                            data-img="/img/broccoli.webp">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="chili">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/chili-pepper.jpg" class="card-img-top product-img" alt="Chili Pepper">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Chili Pepper</h5>
+                        <p class="card-text">Price: ৳400 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Chili Pepper" data-price="400"
+                            data-img="/img/chili-pepper.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="cucumber">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/cucumber.png" class="card-img-top product-img" alt="Cucumber">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Cucumber</h5>
+                        <p class="card-text">Price: ৳100 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Cucumber" data-price="100"
+                            data-img="/img/cucumber.png">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="carrot">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/carrot.jpg" class="card-img-top product-img" alt="Carrot">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Carrot</h5>
+                        <p class="card-text">Price: ৳300 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Carrot" data-price="300"
+                            data-img="/img/carrot.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="capsicum">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/capsicum.webp" class="card-img-top product-img" alt="Capsicum">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Capsicum</h5>
+                        <p class="card-text">Price: ৳400 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Capsicum" data-price="400"
+                            data-img="/img/capsicum.webp">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="Green Peas">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/peas.jpg" class="card-img-top product-img" alt="Green Peas">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Green Peas</h5>
+                        <p class="card-text">Price: ৳800 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Green Peas" data-price="800"
+                            data-img="/img/peas.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="vegetable" data-name="Onion">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/onion.jpg" class="card-img-top product-img" alt="Onion">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Onion</h5>
+                        <p class="card-text">Price: ৳80 / kg</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Onion" data-price="80"
+                            data-img="/img/onion.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Crops Section-->
+             <div class="col-md-3 mb-4 col-sm-6" data-category="crop" data-name="rice">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/rice.jpg" class="card-img-top product-img" alt="Rice">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Rice</h5>
+                        <p class="card-text">Price: ৳1400 / 25kg bag</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Rice" data-price="1400"
+                            data-img="/img/rice.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="crop" data-name="corn">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/corn.jpg" class="card-img-top product-img" alt="Corn">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Corn</h5>
+                        <p class="card-text">Price: ৳1000 / 25kg bag</p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Corn" data-price="1000"
+                            data-img="/img/corn.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 col-sm-6" data-category="crop" data-name="potato">
+                <div class="card h-100 shadow-sm product-card">
+                    <img src="/img/potato1.jpg" class="card-img-top product-img" alt="Potato">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Potato</h5>
+                        <p class="card-text">Price: ৳20 / kg </p>
+                        <button class="btn btn-success btn-sm add-to-cart" data-name="Potato" data-price="20"
+                            data-img="/img/potato1.jpg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary btn-sm">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Farmer Stories Section -->
+    <section class="farmer-stories">
+        <div class="container">
+            <h2 class="text-center text-white mb-5">Success Stories from Our Farmers</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="story-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="/img/farmer1.jpg" alt="Farmer" class="customer-img">
+                            <div>
+                                <h5 class="mb-0">Abdul Rahman</h5>
+                                <p class="mb-0 text-light">Organic Vegetable Farmer</p>
+                            </div>
+                        </div>
+                        <p>"Digital Farmer's Platform has transformed my business. I now get fair prices for my produce
+                            and can directly connect with customers who appreciate quality organic vegetables."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="story-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="/img/farmer2.jpg" alt="Farmer" class="customer-img">
+                            <div>
+                                <h5 class="mb-0">Fatima Begum</h5>
+                                <p class="mb-0 text-light">Fruit Grower</p>
+                            </div>
+                        </div>
+                        <p>"Thanks to this platform, I've expanded my customer base beyond my local area. The support
+                            and training provided have helped me improve my farming techniques significantly."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="story-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="/img/farmer3.jpg" alt="Farmer" class="customer-img">
+                            <div>
+                                <h5 class="mb-0">Mohammad Ali</h5>
+                                <p class="mb-0 text-light">Rice Cultivator</p>
+                            </div>
+                        </div>
+                        <p>"The digital platform has made it so easy to manage orders and payments. I can now focus on
+                            what I do best - growing quality rice - while the platform handles the business side."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section" id="feedbackSection">
+        <div class="container">
+            <h2 class="text-center mb-5">Customer Feedback</h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="feedback-card">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-3">"The quality of vegetables I received was exceptional! Much better than what I
+                            get at the supermarket. Will definitely order again."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/img/customer1.jpg" alt="Customer" class="customer-img">
+                            <div>
+                                <h6 class="mb-0">Rahman M.</h6>
+                                <small class="text-muted">Dhaka</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feedback-card">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="mb-3">"FarmConnect has changed how I shop for groceries. Fresh produce delivered to my
+                            door while supporting local farmers. Win-win!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/img/customer2.jpg" alt="Customer" class="customer-img">
+                            <div>
+                                <h6 class="mb-0">Fatima A.</h6>
+                                <small class="text-muted">Chittagong</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feedback-card">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-3">"I love knowing exactly where my food comes from. The farmers' stories make me
+                            feel connected to the source. Great initiative!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="/img/customer3.jpg" alt="Customer" class="customer-img">
+                            <div>
+                                <h6 class="mb-0">Jamal H.</h6>
+                                <small class="text-muted">Sylhet</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="feedback-form">
+                        <h3 class="text-center mb-4">Share Your Experience</h3>
+                        <form id="feedbackForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Rate Your Experience</label>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5" name="rating" value="5">
+                                    <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star1" name="rating" value="1">
+                                    <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Your Feedback</label>
+                                <textarea class="form-control" rows="4" placeholder="Share your experience with us..."
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Submit Feedback</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <!-- About -->
+                <div class="col-md-3 col-sm-6 mb-4" id="aboutSection">
+                    <h5 class="footer-title">About Us</h5>
+                    <p>Digital Framer's Platform delivers fresh agricultural products directly from farmers to your
+                        doorstep.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#aboutSection">About Us</a></li>
+                        <li><a href="#contactSection">Contact</a></li>
+                        <li><a href="#feedbackSection">Feedback</a></li>
+                    </ul>
+                </div>
+
+                <!-- Payment Partners -->
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="footer-title">Payment Partners</h5>
+                    <div class="d-flex flex-wrap">
+                        <img src="/img/bkash.svg" alt="bKash" class="client-logo">
+                        <img src="/img/nagad.png" alt="Nagad" class="client-logo">
+                        <img src="/img/rocket.png" alt="Rocket" class="client-logo">
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-3 col-sm-6 mb-4" id="contactSection">
+                    <h5 class="footer-title">Contact Us</h5>
+                    <p>Email: digitalframer506@gmail.com</p>
+                    <p>Phone: +880 1734 567890</p>
+                    <p>Address: Dhaka, Bangladesh</p>
+                    <div>
+                        <a href="#"><img src="/img/facebook.png" height="25" class="me-2"></a>
+                        <a href="#"><img src="/img/twitter.png" height="25" class="me-2"></a>
+                        <a href="#"><img src="/img/instagram.jpg" height="25" class="me-2"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                Copyright &copy; 2025 All rights reserved. Designed and Developed by <img src="/img/logo1.png" alt="Logo"
+                    height="40px"></a> Fast & Query-ous Team.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script1.js"></script>
+</body>
+
+</html>
