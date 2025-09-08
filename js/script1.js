@@ -31,22 +31,35 @@
             const cartTotal = document.getElementById("cartTotal");
             const checkoutBtn = document.getElementById("checkoutBtn");
             const paymentMethods = document.querySelectorAll(".payment-method");
-        
-            // Dropdown filtering
-            document.querySelectorAll(".dropdown-item").forEach(item => {
-            item.addEventListener("click", e => {
-                  e.preventDefault();
-                  const selected = item.textContent.trim().toLowerCase();
-                  hideHero();
+       
+       
+       
+       
+           
 
-                  productCards.forEach(card => {
-                    const name = card.dataset.name.toLowerCase();
-                    const category = card.dataset.category.toLowerCase();
-                    card.style.display =
-                      name.includes(selected) || category.includes(selected) ? "block" : "none";
-                  });
-                });
-              });
+
+
+            // Dropdown filtering
+document.querySelectorAll(".dropdown-item").forEach(item => {
+    item.addEventListener("click", e => {
+        e.preventDefault();
+        const selected = item.textContent.trim().toLowerCase();
+        
+        hideHero();
+
+        productCards.forEach(card => {
+            const name = card.dataset.name.toLowerCase();
+            const category = card.dataset.category.toLowerCase();
+            card.style.display =
+                name.includes(selected) || category.includes(selected) ? "block" : "none";
+        });
+        
+        // Add this line to scroll to the products section
+        if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
         
 
               
